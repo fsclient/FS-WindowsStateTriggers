@@ -27,16 +27,16 @@ namespace WindowsStateTriggers
 				var weakEvent =
 					new WeakEventListener<OrientationStateTrigger, DisplayInformation, object>(this)
 					{
-						OnEventAction = (instance, source, eventArgs) => OrientationStateTrigger_OrientationChanged(source, eventArgs),
-						OnDetachAction = (instance, weakEventListener) => DisplayInformation.GetForCurrentView().OrientationChanged -= weakEventListener.OnEvent
+						OnEventAction = OrientationStateTrigger_OrientationChanged,
+						OnDetachAction = (_, weakEventListener) => DisplayInformation.GetForCurrentView().OrientationChanged -= weakEventListener.OnEvent
 					};
 				DisplayInformation.GetForCurrentView().OrientationChanged += weakEvent.OnEvent;
 			}
 		}
 
-		private void OrientationStateTrigger_OrientationChanged(DisplayInformation sender, object args)
+		private static void OrientationStateTrigger_OrientationChanged(OrientationStateTrigger instance, DisplayInformation sender, object args)
 		{
-            UpdateTrigger(sender.CurrentOrientation);
+            instance.UpdateTrigger(sender.CurrentOrientation);
 		}
 
         private void UpdateTrigger(Windows.Graphics.Display.DisplayOrientations orientation)
