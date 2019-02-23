@@ -4,7 +4,7 @@
     <Title>WindowsStateTriggers</Title>
     <Description>StateTriggers for use with the Windows 10 Visual State Manager.</Description>
     <PackageTags>statetrigger adaptive uwp</PackageTags>
-    <Version>1.1.1</Version>
+    <Version>1.1.2</Version>
     <Authors>Max Katz</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Tirraon/WindowsStateTriggers/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Tirraon/WindowsStateTriggers</PackageProjectUrl>
