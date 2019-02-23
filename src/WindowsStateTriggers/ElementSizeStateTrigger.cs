@@ -6,27 +6,27 @@ using Windows.UI.Xaml;
 
 namespace WindowsStateTriggers
 {
-    public class ElementSizeTrigger : StateTriggerBase, ITriggerValue
+    public class ElementSizeStateTrigger : StateTriggerBase, ITriggerValue
     {
         public static readonly DependencyProperty ElementProperty =
             DependencyProperty.Register(
                 "Element",
                 typeof(FrameworkElement),
-                typeof(ElementSizeTrigger),
+                typeof(ElementSizeStateTrigger),
                 new PropertyMetadata(null, OnUIElementPropertyChanged));
 
         public static readonly DependencyProperty MinHeightProperty =
             DependencyProperty.Register(
                 "MinHeight",
                 typeof(double),
-                typeof(ElementSizeTrigger),
+                typeof(ElementSizeStateTrigger),
                 new PropertyMetadata(0d, OnMinHeightOrWidthPropertyChanged));
 
         public static readonly DependencyProperty MinWidthProperty =
             DependencyProperty.Register(
                 "MinWidth",
                 typeof(double),
-                typeof(ElementSizeTrigger),
+                typeof(ElementSizeStateTrigger),
                 new PropertyMetadata(0d, OnMinHeightOrWidthPropertyChanged));
 
         public FrameworkElement Element
@@ -49,7 +49,7 @@ namespace WindowsStateTriggers
 
         private static void OnMinHeightOrWidthPropertyChanged(DependencyObject dependencyObject, object _)
         {
-            if (dependencyObject is ElementSizeTrigger trigger
+            if (dependencyObject is ElementSizeStateTrigger trigger
                 && trigger.Element is FrameworkElement element)
             {
                 trigger.IsActive = element.ActualHeight >= trigger.MinHeight && element.ActualWidth >= trigger.MinWidth;
@@ -59,9 +59,9 @@ namespace WindowsStateTriggers
         private static void OnUIElementPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (e.NewValue is FrameworkElement element
-                && d is ElementSizeTrigger trigger)
+                && d is ElementSizeStateTrigger trigger)
             {
-                var weakEvent = new WeakEventListener<ElementSizeTrigger, object, SizeChangedEventArgs>(trigger)
+                var weakEvent = new WeakEventListener<ElementSizeStateTrigger, object, SizeChangedEventArgs>(trigger)
                 {
                     OnEventAction = OnElementSizeChanged,
                     OnDetachAction = (_, weakEventListener) => element.SizeChanged -= weakEventListener.OnEvent
@@ -70,7 +70,7 @@ namespace WindowsStateTriggers
             }
         }
 
-        private static void OnElementSizeChanged(ElementSizeTrigger instance, object sender, SizeChangedEventArgs args)
+        private static void OnElementSizeChanged(ElementSizeStateTrigger instance, object sender, SizeChangedEventArgs args)
         {
             instance.IsActive = args.NewSize.Height >= instance.MinHeight && args.NewSize.Width >= instance.MinWidth;
         }
