@@ -20,6 +20,10 @@
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
   
   <ItemGroup>
+    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="4.9.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="System.Runtime.WindowsRuntime" Version="4.0.11" />
   </ItemGroup>
 </Project>
