@@ -4,14 +4,15 @@
     <Title>WindowsStateTriggers</Title>
     <Description>StateTriggers for use with the Windows 10 Visual State Manager.</Description>
     <PackageTags>statetrigger adaptive uwp</PackageTags>
-    <Version>1.1.0</Version>
-    <Authors>Morten Nielsen</Authors>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/dotMorten/WindowsStateTriggers/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/dotMorten/WindowsStateTriggers</PackageProjectUrl>
-    <Copyright>© Morten Nielsen 2015</Copyright>
+    <Version>1.1.1</Version>
+    <Authors>Max Katz</Authors>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Tirraon/WindowsStateTriggers/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/Tirraon/WindowsStateTriggers</PackageProjectUrl>
+    <Copyright>© Max Katz 2019</Copyright>
     <RepositoryUrl>https://github.com/dotMorten/WindowsStateTriggers</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>Tirraon.WindowsStateTriggers</PackageId>
   </PropertyGroup>
   
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
