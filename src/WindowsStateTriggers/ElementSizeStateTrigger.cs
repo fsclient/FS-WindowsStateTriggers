@@ -6,8 +6,14 @@ using Windows.UI.Xaml;
 
 namespace WindowsStateTriggers
 {
+	/// <summary>
+	/// Enables a state if element size is changed
+	/// </summary>
     public class ElementSizeStateTrigger : StateTriggerBase, ITriggerValue
     {
+		/// <summary>
+		/// Identifies the <see cref="Element"/> DependencyProperty
+		/// </summary>
         public static readonly DependencyProperty ElementProperty =
             DependencyProperty.Register(
                 "Element",
@@ -15,6 +21,9 @@ namespace WindowsStateTriggers
                 typeof(ElementSizeStateTrigger),
                 new PropertyMetadata(null, OnUIElementPropertyChanged));
 
+		/// <summary>
+		/// Identifies the <see cref="MinHeight"/> DependencyProperty
+		/// </summary>
         public static readonly DependencyProperty MinHeightProperty =
             DependencyProperty.Register(
                 "MinHeight",
@@ -22,6 +31,9 @@ namespace WindowsStateTriggers
                 typeof(ElementSizeStateTrigger),
                 new PropertyMetadata(0d, OnMinHeightOrWidthPropertyChanged));
 
+		/// <summary>
+		/// Identifies the <see cref="MinWidth"/> DependencyProperty
+		/// </summary>
         public static readonly DependencyProperty MinWidthProperty =
             DependencyProperty.Register(
                 "MinWidth",
@@ -29,18 +41,27 @@ namespace WindowsStateTriggers
                 typeof(ElementSizeStateTrigger),
                 new PropertyMetadata(0d, OnMinHeightOrWidthPropertyChanged));
 
+        /// <summary>
+        /// Target element, on which trigger subscribes
+        /// </summary>
         public FrameworkElement Element
         {
             get => (FrameworkElement)GetValue(ElementProperty);
             set => SetValue(ElementProperty, value);
         }
 
+        /// <summary>
+        /// Min height to enable trigger state
+        /// </summary>
         public double MinHeight
         {
             get => (double)GetValue(MinHeightProperty);
             set => SetValue(MinHeightProperty, value);
         }
 
+        /// <summary>
+        /// Min width to enable trigger state
+        /// </summary>
         public double MinWidth
         {
             get => (double)GetValue(MinWidthProperty);
