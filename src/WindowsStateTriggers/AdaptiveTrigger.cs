@@ -30,16 +30,16 @@ namespace WindowsStateTriggers
             {
                 var weakEvent = new WeakEventListener<AdaptiveTrigger, CoreWindow, WindowSizeChangedEventArgs>(this)
                 {
-                    OnEventAction = (instance, s, e) => OnCoreWindowOnSizeChanged(s, e),
-                    OnDetachAction = (instance, weakEventListener) => window.SizeChanged -= weakEventListener.OnEvent
+                    OnEventAction = OnCoreWindowOnSizeChanged,
+                    OnDetachAction = (_, weakEventListener) => window.SizeChanged -= weakEventListener.OnEvent
                 };
                 window.SizeChanged += weakEvent.OnEvent;
             }
         }
 
-        private void OnCoreWindowOnSizeChanged(CoreWindow sender, WindowSizeChangedEventArgs args)
+        private static void OnCoreWindowOnSizeChanged(AdaptiveTrigger instance, CoreWindow sender, WindowSizeChangedEventArgs args)
         {
-            IsActive = args.Size.Height >= MinWindowHeight && args.Size.Width >= MinWindowWidth;
+            instance.IsActive = args.Size.Height >= instance.MinWindowHeight && args.Size.Width >= instance.MinWindowWidth;
         }
 
         private void OnMinWindowHeightPropertyChanged(DependencyObject sender, DependencyProperty dp)

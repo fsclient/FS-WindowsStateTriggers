@@ -25,16 +25,16 @@ namespace WindowsStateTriggers
 				var weakEvent =
 					new WeakEventListener<FullScreenModeTrigger, ApplicationView, object>(this)
 					{
-						OnEventAction = (instance, source, eventArgs) => FullScreenModeTrigger_VisibleBoundsChanged(source, eventArgs),
-						OnDetachAction = (instance, weakEventListener) => ApplicationView.GetForCurrentView().VisibleBoundsChanged -= weakEventListener.OnEvent
+						OnEventAction = FullScreenModeTrigger_VisibleBoundsChanged,
+						OnDetachAction = (_, weakEventListener) => ApplicationView.GetForCurrentView().VisibleBoundsChanged -= weakEventListener.OnEvent
 					};
 				ApplicationView.GetForCurrentView().VisibleBoundsChanged += weakEvent.OnEvent;
 			}
 		}
 
-		private void FullScreenModeTrigger_VisibleBoundsChanged(ApplicationView sender, object args)
+		private static void FullScreenModeTrigger_VisibleBoundsChanged(FullScreenModeTrigger instance, ApplicationView sender, object args)
 		{
-			UpdateTrigger(sender.IsFullScreenMode);
+			instance.UpdateTrigger(sender.IsFullScreenMode);
 		}
 
 		private bool isFullScreen;

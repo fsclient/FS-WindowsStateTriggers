@@ -31,8 +31,8 @@ namespace WindowsStateTriggers
                 var weakEvent =
                     new WeakEventListener<UserInteractionModeTrigger, object, WindowSizeChangedEventArgs>(this)
                     {
-                        OnEventAction = (instance, source, eventArgs) => UserInteractionModeTrigger_SizeChanged(source, eventArgs),
-                        OnDetachAction = (instance, weakEventListener) => Window.Current.SizeChanged -= weakEventListener.OnEvent
+                        OnEventAction = UserInteractionModeTrigger_SizeChanged,
+                        OnDetachAction = (_, weakEventListener) => Window.Current.SizeChanged -= weakEventListener.OnEvent
                     };
                 Window.Current.SizeChanged += weakEvent.OnEvent;
                 UpdateTrigger(InteractionMode);
@@ -89,9 +89,9 @@ namespace WindowsStateTriggers
             IsActive = interactionMode == UIViewSettings.GetForCurrentView().UserInteractionMode;
         }
 
-        private void UserInteractionModeTrigger_SizeChanged(object sender, WindowSizeChangedEventArgs e)
+        private static void UserInteractionModeTrigger_SizeChanged(UserInteractionModeTrigger instance, object sender, WindowSizeChangedEventArgs e)
         {
-            UpdateTrigger(InteractionMode);
+            instance.UpdateTrigger(instance.InteractionMode);
         }
     }
 }
