@@ -9,10 +9,12 @@
     <PackageLicenseUrl>https://raw.githubusercontent.com/Tirraon/WindowsStateTriggers/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Tirraon/WindowsStateTriggers</PackageProjectUrl>
     <Copyright>© Max Katz 2019</Copyright>
-    <RepositoryUrl>https://github.com/dotMorten/WindowsStateTriggers</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Tirraon/WindowsStateTriggers</RepositoryUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>Tirraon.WindowsStateTriggers</PackageId>
+    <Product>Tirraon.WindowsStateTriggers</Product>
+    <AssemblyName>Tirraon.WindowsStateTriggers</AssemblyName>
   </PropertyGroup>
   
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
