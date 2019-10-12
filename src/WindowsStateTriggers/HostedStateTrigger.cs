@@ -7,6 +7,9 @@ namespace WindowsStateTriggers
     /// <summary>
     /// A state trigger for determining if the app is in a hosted state (for example, if share is being used)
     /// </summary>
+#if UNO
+    [Uno.NotImplemented]
+#endif
     public class HostedStateTrigger : StateTriggerBase, ITriggerValue
     {
         /// <summary>

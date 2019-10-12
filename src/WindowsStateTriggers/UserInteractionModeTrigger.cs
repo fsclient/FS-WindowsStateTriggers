@@ -12,6 +12,9 @@ namespace WindowsStateTriggers
     /// <summary>
     /// Trigger for switching when the User interaction mode changes (tablet mode)
     /// </summary>
+#if UNO
+    [Uno.NotImplemented]
+#endif
     public sealed class UserInteractionModeTrigger : StateTriggerBase, ITriggerValue
     {
         private bool m_IsActive;

@@ -1,10 +1,10 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.68">
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
   <PropertyGroup>
-    <TargetFramework>uap10.0.10240</TargetFramework>
+    <TargetFrameworks>uap10.0.10240;netstandard2.0</TargetFrameworks>
     <Title>WindowsStateTriggers</Title>
     <Description>StateTriggers for use with the Windows 10 Visual State Manager.</Description>
     <PackageTags>statetrigger adaptive uwp</PackageTags>
-    <Version>1.1.2</Version>
+    <Version>1.2.0</Version>
     <Authors>Max Katz</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Tirraon/WindowsStateTriggers/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Tirraon/WindowsStateTriggers</PackageProjectUrl>
@@ -16,14 +16,28 @@
     <Product>Tirraon.WindowsStateTriggers</Product>
     <AssemblyName>Tirraon.WindowsStateTriggers</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid80' or '$(TargetFramework)' == 'xamarinios10' or '$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Uno.UI" Version="2.0.512-dev.3325" />
+  </ItemGroup>
   
+  <PropertyGroup Condition="'$(TargetFramework)' == 'MonoAndroid80' or '$(TargetFramework)' == 'xamarinios10' or '$(TargetFramework)' == 'netstandard2.0'">
+    <DefineConstants>$(DefineConstants);UNO</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
+  </PropertyGroup>
+  
+  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.10240' ">
+    <PackageReference Include="System.Runtime.WindowsRuntime" Version="4.0.11" />
+  </ItemGroup>
+
   <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
-  
+
   <ItemGroup>
-    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="4.9.3">
+    <PackageReference Include="NuGet.Build.Tasks.Pack" Version="5.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.Runtime.WindowsRuntime" Version="4.0.11" />
   </ItemGroup>
 </Project>

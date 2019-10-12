@@ -16,7 +16,10 @@ namespace WindowsStateTriggers
     /// <summary>
     /// Trigger for switching when the network availability changes
     /// </summary>
-	public class NetworkConnectionStateTrigger : StateTriggerBase, ITriggerValue
+#if UNO
+    [Uno.NotImplemented]
+#endif
+    public class NetworkConnectionStateTrigger : StateTriggerBase, ITriggerValue
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="NetworkConnectionStateTrigger"/> class.

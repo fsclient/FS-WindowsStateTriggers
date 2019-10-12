@@ -10,10 +10,13 @@ using Windows.UI.Xaml;
 
 namespace WindowsStateTriggers
 {
-	/// <summary>
-	/// Trigger for switching when in full screen mode.
-	/// </summary>
-	public class FullScreenModeTrigger : StateTriggerBase, ITriggerValue
+    /// <summary>
+    /// Trigger for switching when in full screen mode.
+    /// </summary>
+#if UNO
+    [Uno.NotImplemented]
+#endif
+    public class FullScreenModeTrigger : StateTriggerBase, ITriggerValue
 	{
 		/// <summary>
 		/// Initializes a new instance of the <see cref="FullScreenModeTrigger"/> class.

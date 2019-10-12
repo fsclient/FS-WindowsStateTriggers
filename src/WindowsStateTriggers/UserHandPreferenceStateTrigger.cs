@@ -8,10 +8,13 @@ using Windows.UI.Xaml;
 
 namespace WindowsStateTriggers
 {
-	/// <summary>
-	/// Trigger for switching UI based on whether the user favours their left or right hand.
-	/// </summary>
-	public class UserHandPreferenceStateTrigger : StateTriggerBase, ITriggerValue
+    /// <summary>
+    /// Trigger for switching UI based on whether the user favours their left or right hand.
+    /// </summary>
+#if UNO
+    [Uno.NotImplemented]
+#endif
+    public class UserHandPreferenceStateTrigger : StateTriggerBase, ITriggerValue
 	{
 		private static HandPreference handPreference;
 

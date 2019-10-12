@@ -7,10 +7,13 @@ using Windows.UI.Xaml;
 
 namespace WindowsStateTriggers
 {
-	/// <summary>
-	/// Trigger for switching between Windows and Windows Phone
-	/// </summary>
-	public class DeviceFamilyStateTrigger : StateTriggerBase, ITriggerValue
+    /// <summary>
+    /// Trigger for switching between Windows and Windows Phone
+    /// </summary>
+#if UNO
+    [Uno.NotImplemented]
+#endif
+    public class DeviceFamilyStateTrigger : StateTriggerBase, ITriggerValue
 	{
 		private static string deviceFamily;
 
