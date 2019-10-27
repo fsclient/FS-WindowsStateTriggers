@@ -66,11 +66,24 @@ namespace WindowsStateTriggers
 
 		internal static bool AreValuesEqual(object value1, object value2, bool convertType)
 		{
-			if (value1 == value2)
+            if (value1 is null && value2 is null)
+            {
+                return true;
+            }
+            else if (value1 is null || value2 is null)
+            {
+                return false;
+            }
+			else if (value1.Equals(value2) is var equalsResult
+                && equalsResult)
 			{
 				return true;
 			}
-			if (value1 != null && value2 != null && convertType)
+            else if (value1.GetType() == value2.GetType())
+            {
+                return equalsResult;
+            }
+			else if (convertType)
 			{
 				// Try the conversion in both ways:
 				return ConvertTypeEquals(value1, value2) || ConvertTypeEquals(value2, value1);
