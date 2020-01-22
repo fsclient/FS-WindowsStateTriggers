@@ -18,30 +18,30 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value>The type of the pointer.</value>
 		public PointerDeviceType PointerType
-		{
-			get { return (PointerDeviceType)GetValue(PointerTypeProperty); }
-			set { SetValue(PointerTypeProperty, value); }
-		}
+        {
+            get => (PointerDeviceType)GetValue(PointerTypeProperty);
+            set => SetValue(PointerTypeProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="PointerType"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty PointerTypeProperty =
+        /// <summary>
+        /// Identifies the <see cref="PointerType"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty PointerTypeProperty =
 			DependencyProperty.Register("PointerType", typeof(PointerDeviceType), typeof(InputTypeTrigger), new PropertyMetadata(PointerDeviceType.Pen));
 
 		/// <summary>
 		/// Gets or sets the target element.
 		/// </summary>
 		public FrameworkElement TargetElement
-		{
-			get { return GetValue(TargetElementProperty) as FrameworkElement; }
-			set { SetValue(TargetElementProperty, value); }
-		}
+        {
+            get => GetValue(TargetElementProperty) as FrameworkElement;
+            set => SetValue(TargetElementProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="TargetElement"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty TargetElementProperty =
+        /// <summary>
+        /// Identifies the <see cref="TargetElement"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty TargetElementProperty =
 			DependencyProperty.Register("TargetElement", typeof(string), typeof(InputTypeTrigger), 
 			new PropertyMetadata("", OnTargetElementPropertyChanged));
 
@@ -74,24 +74,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

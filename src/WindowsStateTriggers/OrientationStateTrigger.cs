@@ -61,15 +61,15 @@ namespace WindowsStateTriggers
 		/// Gets or sets the orientation to trigger on.
 		/// </summary>
 		public Orientations Orientation
-		{
-			get { return (Orientations)GetValue(OrientationProperty); }
-			set { SetValue(OrientationProperty, value); }
-		}
+        {
+            get => (Orientations)GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="Orientation"/> parameter.
-		/// </summary>
-		public static readonly DependencyProperty OrientationProperty =
+        /// <summary>
+        /// Identifies the <see cref="Orientation"/> parameter.
+        /// </summary>
+        public static readonly DependencyProperty OrientationProperty =
 			DependencyProperty.Register("Orientation", typeof(Orientations), typeof(OrientationStateTrigger), 
 			new PropertyMetadata(Orientations.None, OnOrientationPropertyChanged));
 
@@ -92,24 +92,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 

@@ -19,17 +19,17 @@ namespace WindowsStateTriggers
 		/// <summary>
 		/// WeakReference to the instance listening for the event.
 		/// </summary>
-		private WeakReference _weakInstance;
+		private readonly WeakReference _weakInstance;
 
 		/// <summary>
 		/// Gets or sets the method to call when the event fires.
 		/// </summary>
-		public Action<TInstance, TSource, TEventArgs> OnEventAction { get; set; }
+		public Action<TInstance, TSource, TEventArgs>? OnEventAction { get; set; }
 
 		/// <summary>
 		/// Gets or sets the method to call when detaching from the event.
 		/// </summary>
-		public Action<TInstance, WeakEventListener<TInstance, TSource, TEventArgs>> OnDetachAction { get; set; }
+		public Action<TInstance, WeakEventListener<TInstance, TSource, TEventArgs>>? OnDetachAction { get; set; }
 
 		/// <summary>
 		/// Initializes a new instances of the WeakEventListener class.
@@ -54,12 +54,9 @@ namespace WindowsStateTriggers
 			TInstance target = (TInstance)_weakInstance.Target;
 			if (null != target)
 			{
-				// Call registered action
-				if (null != OnEventAction)
-				{
-					OnEventAction(target, source, eventArgs);
-				}
-			}
+                // Call registered action
+                OnEventAction?.Invoke(target, source, eventArgs);
+            }
 			else
 			{
 				// Detach from event
@@ -94,17 +91,17 @@ namespace WindowsStateTriggers
 		/// <summary>
 		/// WeakReference to the instance listening for the event.
 		/// </summary>
-		private WeakReference _weakInstance;
+		private readonly WeakReference _weakInstance;
 
 		/// <summary>
 		/// Gets or sets the method to call when the event fires.
 		/// </summary>
-		public Action<TInstance, TSource> OnEventAction { get; set; }
+		public Action<TInstance, TSource>? OnEventAction { get; set; }
 
 		/// <summary>
 		/// Gets or sets the method to call when detaching from the event.
 		/// </summary>
-		public Action<TInstance, WeakEventListener<TInstance, TSource>> OnDetachAction { get; set; }
+		public Action<TInstance, WeakEventListener<TInstance, TSource>>? OnDetachAction { get; set; }
 
 		/// <summary>
 		/// Initializes a new instances of the WeakEventListener class.
@@ -128,12 +125,9 @@ namespace WindowsStateTriggers
 			TInstance target = (TInstance)_weakInstance.Target;
 			if (null != target)
 			{
-				// Call registered action
-				if (null != OnEventAction)
-				{
-					OnEventAction(target, source);
-				}
-			}
+                // Call registered action
+                OnEventAction?.Invoke(target, source);
+            }
 			else
 			{
 				// Detach from event

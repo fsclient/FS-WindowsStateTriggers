@@ -23,8 +23,8 @@ namespace WindowsStateTriggers
         /// </summary>
         public HostedState IsHosted
         {
-            get { return (HostedState)GetValue(IsHostedProperty); }
-            set { SetValue(IsHostedProperty, value); }
+            get => (HostedState)GetValue(IsHostedProperty);
+            set => SetValue(IsHostedProperty, value);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace WindowsStateTriggers
         /// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
         public bool IsActive
         {
-            get { return m_IsActive; }
+            get => m_IsActive;
             private set
             {
                 if (m_IsActive != value)
@@ -99,7 +99,7 @@ namespace WindowsStateTriggers
         /// <summary>
         /// Occurs when the <see cref="IsActive" /> property has changed.
         /// </summary>
-        public event EventHandler IsActiveChanged;
+        public event EventHandler? IsActiveChanged;
 
         #endregion ITriggerValue
     }

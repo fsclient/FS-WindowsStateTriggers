@@ -16,15 +16,15 @@ namespace WindowsStateTriggers
 		/// Gets or sets the value used to check for <c>false</c>.
 		/// </summary>
 		public bool Value
-		{
-			get { return (bool)GetValue(ValueProperty); }
-			set { SetValue(ValueProperty, value); }
-		}
+        {
+            get => (bool)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="Value"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty ValueProperty =
+        /// <summary>
+        /// Identifies the <see cref="Value"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty ValueProperty =
 			DependencyProperty.Register("Value", typeof(bool), typeof(IsFalseStateTrigger), 
 			new PropertyMetadata(true, OnValuePropertyChanged));
 
@@ -44,24 +44,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

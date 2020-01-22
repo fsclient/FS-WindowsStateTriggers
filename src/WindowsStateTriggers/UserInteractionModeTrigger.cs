@@ -22,7 +22,7 @@ namespace WindowsStateTriggers
         /// <summary>
 		/// Occurs when the <see cref="IsActive" /> property has changed.
 		/// </summary>
-        public event EventHandler IsActiveChanged;
+        public event EventHandler? IsActiveChanged;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserInteractionModeTrigger"/> class.
@@ -48,15 +48,14 @@ namespace WindowsStateTriggers
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
         public bool IsActive
         {
-            get { return m_IsActive; }
+            get => m_IsActive;
             private set
             {
                 if (m_IsActive != value)
                 {
                     m_IsActive = value;
                     base.SetActive(value);
-                    if (IsActiveChanged != null)
-                        IsActiveChanged(this, EventArgs.Empty);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -66,8 +65,8 @@ namespace WindowsStateTriggers
 		/// </summary>
         public UserInteractionMode InteractionMode
         {
-            get { return (UserInteractionMode)GetValue(InteractionModeProperty); }
-            set { SetValue(InteractionModeProperty, value); }
+            get => (UserInteractionMode)GetValue(InteractionModeProperty);
+            set => SetValue(InteractionModeProperty, value);
         }
 
         /// <summary>

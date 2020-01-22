@@ -96,7 +96,7 @@ namespace WindowsStateTriggers
 			}
 			//else: Handle remove and reset
 		}
-		private void OnTriggerCollectionChanged(IEnumerable<StateTriggerBase> oldItems, IEnumerable<StateTriggerBase> newItems)
+		private void OnTriggerCollectionChanged(IEnumerable<StateTriggerBase>? oldItems, IEnumerable<StateTriggerBase>? newItems)
 		{
 			if (newItems != null)
 			{
@@ -158,8 +158,8 @@ namespace WindowsStateTriggers
 		/// </summary>
 		public StateTriggerCollection StateTriggers
 		{
-			get { return (StateTriggerCollection)GetValue(StateTriggersProperty); }
-			set { SetValue(StateTriggersProperty, value); }
+			get => (StateTriggerCollection)GetValue(StateTriggersProperty);
+			set => SetValue(StateTriggersProperty, value);
 		}
 
 		/// <summary>
@@ -227,8 +227,8 @@ namespace WindowsStateTriggers
 		/// <value>The evaluation.</value>
 		public LogicalOperator Operator
 		{
-			get { return (LogicalOperator)GetValue(OperatorProperty); }
-			set { SetValue(OperatorProperty, value); }
+			get => (LogicalOperator)GetValue(OperatorProperty);
+			set => SetValue(OperatorProperty, value);
 		}
 
 		/// <summary>
@@ -253,15 +253,14 @@ namespace WindowsStateTriggers
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
 		{
-			get { return m_IsActive; }
+			get => m_IsActive;
 			private set
 			{
 				if (m_IsActive != value)
 				{
 					m_IsActive = value;
 					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
+					IsActiveChanged?.Invoke(this, EventArgs.Empty);
 				}
 			}
 		}
@@ -269,7 +268,7 @@ namespace WindowsStateTriggers
 		/// <summary>
 		/// Occurs when the <see cref="IsActive" /> property has changed.
 		/// </summary>
-		public event EventHandler IsActiveChanged;
+		public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

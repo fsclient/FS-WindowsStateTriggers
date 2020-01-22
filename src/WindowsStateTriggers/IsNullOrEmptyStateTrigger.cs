@@ -18,15 +18,15 @@ namespace WindowsStateTriggers
 		/// Gets or sets the value used to check for <c>null</c> or empty.
 		/// </summary>
 		public object Value
-		{
-			get { return GetValue(ValueProperty); }
-			set { SetValue(ValueProperty, value); }
-		}
+        {
+            get => GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="Value"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty ValueProperty =
+        /// <summary>
+        /// Identifies the <see cref="Value"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty ValueProperty =
 			DependencyProperty.Register("Value", typeof(object), typeof(IsNullOrEmptyStateTrigger),
 			new PropertyMetadata(true, OnValuePropertyChanged));
 
@@ -38,11 +38,13 @@ namespace WindowsStateTriggers
 			obj.IsActive = IsNullOrEmpty(val);
 
 			if (val == null)
-				return;
+            {
+                return;
+            }
 
-			// Try to listen for various notification events
-			// Starting with INorifyCollectionChanged
-			var valNotifyCollection = val as INotifyCollectionChanged;
+            // Try to listen for various notification events
+            // Starting with INorifyCollectionChanged
+            var valNotifyCollection = val as INotifyCollectionChanged;
 			if (valNotifyCollection != null)
 			{
 				var weakEvent = new WeakEventListener<INotifyCollectionChanged, object, NotifyCollectionChangedEventArgs>(valNotifyCollection)
@@ -85,10 +87,13 @@ namespace WindowsStateTriggers
 
 		private static bool IsNullOrEmpty(object val)
 		{
-			if (val == null) return true;
+			if (val == null)
+            {
+                return true;
+            }
 
-			// Object is not null, check for an empty string
-			var valString = val as string;
+            // Object is not null, check for an empty string
+            var valString = val as string;
 			if (valString != null)
 			{
 				return (valString.Length == 0);
@@ -127,24 +132,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

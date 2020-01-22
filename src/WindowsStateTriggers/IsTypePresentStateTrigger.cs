@@ -27,15 +27,15 @@ namespace WindowsStateTriggers
 		/// Example: <c>Windows.Phone.UI.Input.HardwareButtons</c>
 		/// </remarks>
 		public string TypeName
-		{
-			get { return (string)GetValue(TypeNameProperty); }
-			set { SetValue(TypeNameProperty, value); }
-		}
+        {
+            get => (string)GetValue(TypeNameProperty);
+            set => SetValue(TypeNameProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="TypeName"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty TypeNameProperty =
+        /// <summary>
+        /// Identifies the <see cref="TypeName"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty TypeNameProperty =
 			DependencyProperty.Register("TypeName", typeof(string), typeof(IsTypePresentStateTrigger), 
 			new PropertyMetadata("", OnTypeNamePropertyChanged));
 
@@ -55,24 +55,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

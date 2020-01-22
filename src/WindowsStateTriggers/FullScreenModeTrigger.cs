@@ -1,10 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Foundation.Metadata;
-using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 
@@ -45,23 +39,20 @@ namespace WindowsStateTriggers
 		/// Gets or sets the full screen preference to trigger on.
 		/// </summary>
 		public bool IsFullScreen
-		{
-			get
-			{
-				return isFullScreen;
-			}
-			set
-			{
-				isFullScreen = value;
-				if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
-				{
-					var isFullScreenMode = ApplicationView.GetForCurrentView().IsFullScreenMode;
-					UpdateTrigger(isFullScreenMode);
-				}
-			}
-		}
+        {
+            get => isFullScreen;
+            set
+            {
+                isFullScreen = value;
+                if (!Windows.ApplicationModel.DesignMode.DesignModeEnabled)
+                {
+                    var isFullScreenMode = ApplicationView.GetForCurrentView().IsFullScreenMode;
+                    UpdateTrigger(isFullScreenMode);
+                }
+            }
+        }
 
-		private void UpdateTrigger(bool isFullScreenMode)
+        private void UpdateTrigger(bool isFullScreenMode)
 		{
 			IsActive = (IsFullScreen == isFullScreenMode);
 		}
@@ -75,23 +66,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					IsActiveChanged?.Invoke(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

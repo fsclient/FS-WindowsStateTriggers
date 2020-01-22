@@ -18,8 +18,8 @@ namespace WindowsStateTriggers
         /// </summary>
         public ITriggerValue StateTrigger
         {
-            get { return (ITriggerValue)GetValue(StateTriggerProperty); }
-            set { SetValue(StateTriggerProperty, value); }
+            get => (ITriggerValue)GetValue(StateTriggerProperty);
+            set => SetValue(StateTriggerProperty, value);
         }
 
         /// <summary>
@@ -58,15 +58,14 @@ namespace WindowsStateTriggers
         /// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
         public bool IsActive
         {
-            get { return m_IsActive; }
+            get => m_IsActive;
             private set
             {
                 if (m_IsActive != value)
                 {
                     m_IsActive = value;
                     base.SetActive(value);
-                    if (IsActiveChanged != null)
-                        IsActiveChanged(this, EventArgs.Empty);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
                 }
             }
         }
@@ -74,7 +73,7 @@ namespace WindowsStateTriggers
         /// <summary>
         /// Occurs when the <see cref="IsActive" /> property has changed.
         /// </summary>
-        public event EventHandler IsActiveChanged;
+        public event EventHandler? IsActiveChanged;
 
         #endregion ITriggerValue
     }

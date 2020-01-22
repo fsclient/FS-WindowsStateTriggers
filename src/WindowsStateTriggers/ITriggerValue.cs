@@ -16,6 +16,6 @@ namespace WindowsStateTriggers
 		/// <summary>
 		/// Occurs when the <see cref="IsActive"/> property has changed.
 		/// </summary>
-		event EventHandler IsActiveChanged;
+		event EventHandler? IsActiveChanged;
 	}
 }

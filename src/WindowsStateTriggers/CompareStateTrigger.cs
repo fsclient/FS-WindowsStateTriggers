@@ -31,8 +31,8 @@ namespace WindowsStateTriggers
 		/// </summary>
 		public object Value
 		{
-			get { return (object)GetValue(ValueProperty); }
-			set { SetValue(ValueProperty, value); }
+			get => (object)GetValue(ValueProperty);
+			set => SetValue(ValueProperty, value);
 		}
 
 		/// <summary>
@@ -53,8 +53,8 @@ namespace WindowsStateTriggers
 		/// </summary>
 		public object CompareTo
 		{
-			get { return (object)GetValue(CompareToProperty); }
-			set { SetValue(CompareToProperty, value); }
+			get => (object)GetValue(CompareToProperty);
+			set => SetValue(CompareToProperty, value);
 		}
 
 		/// <summary>
@@ -68,8 +68,8 @@ namespace WindowsStateTriggers
 		/// </summary>
 		public Comparison Comparison
 		{
-			get { return (Comparison)GetValue(ComparisonProperty); }
-			set { SetValue(ComparisonProperty, value); }
+			get => (Comparison)GetValue(ComparisonProperty);
+			set => SetValue(ComparisonProperty, value);
 		}
 
 		/// <summary>
@@ -85,7 +85,9 @@ namespace WindowsStateTriggers
 			if (v1 == v2)
 			{
 				if (Comparison == Comparison.Equal)
+				{
 					return Comparison.Equal;
+				}
 			}
 			if (v1 != null && v2 != null)
 			{
@@ -115,9 +117,18 @@ namespace WindowsStateTriggers
 					if (v1 is IComparable)
 					{
 						var result = ((IComparable)v1).CompareTo(v2);
-						if (result < 0) return Comparison.LessThan;
-						else if (result == 0) return Comparison.Equal;
-						else return Comparison.GreaterThan;
+						if (result < 0)
+						{
+							return Comparison.LessThan;
+						}
+						else if (result == 0)
+						{
+							return Comparison.Equal;
+						}
+						else
+						{
+							return Comparison.GreaterThan;
+						}
 					}
 				}
 			}
@@ -134,15 +145,14 @@ namespace WindowsStateTriggers
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
 		{
-			get { return m_IsActive; }
+			get => m_IsActive;
 			private set
 			{
 				if (m_IsActive != value)
 				{
 					m_IsActive = value;
 					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
+					IsActiveChanged?.Invoke(this, EventArgs.Empty);
 				}
 			}
 		}
@@ -150,7 +160,7 @@ namespace WindowsStateTriggers
 		/// <summary>
 		/// Occurs when the <see cref="IsActive" /> property has changed.
 		/// </summary>
-		public event EventHandler IsActiveChanged;
+		public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

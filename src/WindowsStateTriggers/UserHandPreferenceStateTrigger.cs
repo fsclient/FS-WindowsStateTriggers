@@ -36,15 +36,15 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value>A value from the <see cref="Windows.UI.ViewManagement.HandPreference"/> enum.</value>
 		public HandPreference HandPreference
-		{
-			get { return (HandPreference)GetValue(HandPreferenceProperty); }
-			set { SetValue(HandPreferenceProperty, value); }
-		}
+        {
+            get => (HandPreference)GetValue(HandPreferenceProperty);
+            set => SetValue(HandPreferenceProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="HandPreference"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty HandPreferenceProperty =
+        /// <summary>
+        /// Identifies the <see cref="HandPreference"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty HandPreferenceProperty =
 			DependencyProperty.Register("HandPreference", typeof(HandPreference), typeof(UserHandPreferenceStateTrigger),
 			new PropertyMetadata(Windows.UI.ViewManagement.HandPreference.RightHanded, OnHandPreferencePropertyChanged));
 
@@ -64,24 +64,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

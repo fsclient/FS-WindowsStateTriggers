@@ -22,8 +22,8 @@ namespace WindowsStateTriggers
 		/// </summary>
         public AdaptiveTrigger()
         {
-            this.RegisterPropertyChangedCallback(MinWindowHeightProperty, OnMinWindowHeightPropertyChanged);
-            this.RegisterPropertyChangedCallback(MinWindowWidthProperty, OnMinWindowWidthPropertyChanged);
+            RegisterPropertyChangedCallback(MinWindowHeightProperty, OnMinWindowHeightPropertyChanged);
+            RegisterPropertyChangedCallback(MinWindowWidthProperty, OnMinWindowWidthPropertyChanged);
 
             var window = Window.Current;
             if (window != null)
@@ -70,7 +70,7 @@ namespace WindowsStateTriggers
         /// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
         public bool IsActive
         {
-            get { return _isActive; }
+            get => _isActive;
             private set
             {
                 if (_isActive != value)
@@ -84,7 +84,7 @@ namespace WindowsStateTriggers
         /// <summary>
         /// Occurs when the <see cref="IsActive" /> property has changed.
         /// </summary>
-        public event EventHandler IsActiveChanged;
+        public event EventHandler? IsActiveChanged;
 
         #endregion ITriggerValue
     }

@@ -30,15 +30,15 @@ namespace WindowsStateTriggers
 		/// Gets or sets the value for comparison.
 		/// </summary>
 		public object Value
-		{
-			get { return (object)GetValue(ValueProperty); }
-			set { SetValue(ValueProperty, value); }
-		}
+        {
+            get => (object)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="Value"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty ValueProperty =
+        /// <summary>
+        /// Identifies the <see cref="Value"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty ValueProperty =
 			DependencyProperty.Register("Value", typeof(object), typeof(EqualsStateTrigger), 
 			new PropertyMetadata(null, OnValuePropertyChanged));
 
@@ -52,15 +52,15 @@ namespace WindowsStateTriggers
 		/// Gets or sets the value to compare equality to.
 		/// </summary>
 		public object EqualTo
-		{
-			get { return (object)GetValue(EqualToProperty); }
-			set { SetValue(EqualToProperty, value); }
-		}
+        {
+            get => (object)GetValue(EqualToProperty);
+            set => SetValue(EqualToProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="EqualTo"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty EqualToProperty =
+        /// <summary>
+        /// Identifies the <see cref="EqualTo"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty EqualToProperty =
 					DependencyProperty.Register("EqualTo", typeof(object), typeof(EqualsStateTrigger), new PropertyMetadata(null, OnValuePropertyChanged));
 
 
@@ -91,7 +91,7 @@ namespace WindowsStateTriggers
 			return false;
 		}
 
-		private static bool ConvertTypeEquals(object value1, object value2)
+		private static bool ConvertTypeEquals(object? value1, object value2)
 		{
 			// Let's see if we can convert:
 			if (value2 is Enum)
@@ -105,7 +105,7 @@ namespace WindowsStateTriggers
 			return value2.Equals(value1);
 		}
 
-		private static object ConvertToEnum(Type enumType, object value)
+		private static object? ConvertToEnum(Type enumType, object? value)
 		{
 			try
 			{
@@ -126,24 +126,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

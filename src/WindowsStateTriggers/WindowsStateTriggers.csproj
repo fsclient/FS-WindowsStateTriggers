@@ -1,10 +1,12 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
   <PropertyGroup>
     <TargetFrameworks>uap10.0.10240;netstandard2.0</TargetFrameworks>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
     <Title>WindowsStateTriggers</Title>
     <Description>StateTriggers for use with the Windows 10 Visual State Manager.</Description>
     <PackageTags>statetrigger adaptive uwp</PackageTags>
-    <Version>1.2.1</Version>
+    <Version>1.3.0</Version>
     <Authors>Max Katz</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/Tirraon/WindowsStateTriggers/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Tirraon/WindowsStateTriggers</PackageProjectUrl>

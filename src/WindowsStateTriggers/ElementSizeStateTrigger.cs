@@ -85,7 +85,7 @@ namespace WindowsStateTriggers
                 var weakEvent = new WeakEventListener<ElementSizeStateTrigger, object, SizeChangedEventArgs>(trigger)
                 {
                     OnEventAction = OnElementSizeChanged,
-                    OnDetachAction = (_, weakEventListener) => element.SizeChanged -= weakEventListener.OnEvent
+                    OnDetachAction = (trigger, weakEventListener) => trigger.Element.SizeChanged -= weakEventListener.OnEvent
                 };
                 element.SizeChanged += weakEvent.OnEvent;
             }
@@ -121,7 +121,7 @@ namespace WindowsStateTriggers
         /// <summary>
         /// Occurs when the <see cref="IsActive" /> property has changed.
         /// </summary>
-        public event EventHandler IsActiveChanged;
+        public event EventHandler? IsActiveChanged;
 
         #endregion ITriggerValue
     }

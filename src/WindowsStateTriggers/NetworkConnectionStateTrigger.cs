@@ -46,8 +46,11 @@ namespace WindowsStateTriggers
 			bool isConnected = false;
 			var profile = NetworkInformation.GetInternetConnectionProfile();
 			if(profile != null)
-				isConnected = profile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
-			IsActive = (
+            {
+                isConnected = profile.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
+            }
+
+            IsActive = (
 				 isConnected && ConnectionState == ConnectionState.Connected ||
 				!isConnected && ConnectionState == ConnectionState.Disconnected);
 		}
@@ -56,15 +59,15 @@ namespace WindowsStateTriggers
 		/// Gets or sets the state of the connection to trigger on.
 		/// </summary>
 		public ConnectionState ConnectionState
-		{
-			get { return (ConnectionState)GetValue(ConnectionStateProperty); }
-			set { SetValue(ConnectionStateProperty, value); }
-		}
+        {
+            get => (ConnectionState)GetValue(ConnectionStateProperty);
+            set => SetValue(ConnectionStateProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="ConnectionState"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty ConnectionStateProperty =
+        /// <summary>
+        /// Identifies the <see cref="ConnectionState"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty ConnectionStateProperty =
 			DependencyProperty.Register("ConnectionState", typeof(ConnectionState), typeof(NetworkConnectionStateTrigger), 
 			new PropertyMetadata(ConnectionState.Connected, OnConnectionStatePropertyChanged));
 
@@ -83,24 +86,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

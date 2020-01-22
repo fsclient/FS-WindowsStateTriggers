@@ -34,15 +34,15 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value>The device family.</value>
 		public DeviceFamily DeviceFamily
-		{
-			get { return (DeviceFamily)GetValue(DeviceFamilyProperty); }
-			set { SetValue(DeviceFamilyProperty, value); }
-		}
+        {
+            get => (DeviceFamily)GetValue(DeviceFamilyProperty);
+            set => SetValue(DeviceFamilyProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="DeviceFamily"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty DeviceFamilyProperty =
+        /// <summary>
+        /// Identifies the <see cref="DeviceFamily"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty DeviceFamilyProperty =
 			DependencyProperty.Register("DeviceFamily", typeof(DeviceFamily), typeof(DeviceFamilyStateTrigger),
 			new PropertyMetadata(DeviceFamily.Unknown, OnDeviceTypePropertyChanged));
 
@@ -51,20 +51,34 @@ namespace WindowsStateTriggers
 			var obj = (DeviceFamilyStateTrigger)d;
 			var val = (DeviceFamily)e.NewValue;
 			if (deviceFamily == "Windows.Mobile")
-				obj.IsActive = (val == DeviceFamily.Mobile);
-			else if (deviceFamily == "Windows.Desktop")
-				obj.IsActive = (val == DeviceFamily.Desktop);
-			else if (deviceFamily == "Windows.Team")
-				obj.IsActive = (val == DeviceFamily.Team);
-			else if (deviceFamily == "Windows.IoT")
-				obj.IsActive = (val == DeviceFamily.IoT);
-			else if (deviceFamily == "Windows.Holographic")
-				obj.IsActive = (val == DeviceFamily.Holographic);
+            {
+                obj.IsActive = (val == DeviceFamily.Mobile);
+            }
+            else if (deviceFamily == "Windows.Desktop")
+            {
+                obj.IsActive = (val == DeviceFamily.Desktop);
+            }
+            else if (deviceFamily == "Windows.Team")
+            {
+                obj.IsActive = (val == DeviceFamily.Team);
+            }
+            else if (deviceFamily == "Windows.IoT")
+            {
+                obj.IsActive = (val == DeviceFamily.IoT);
+            }
+            else if (deviceFamily == "Windows.Holographic")
+            {
+                obj.IsActive = (val == DeviceFamily.Holographic);
+            }
             else if (deviceFamily == "Windows.Xbox")
+            {
                 obj.IsActive = (val == DeviceFamily.Xbox);
+            }
             else
+            {
                 obj.IsActive = (val == DeviceFamily.Unknown);
-		}
+            }
+        }
 
 		#region ITriggerValue
 
@@ -75,24 +89,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}

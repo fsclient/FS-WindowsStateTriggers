@@ -34,15 +34,15 @@ namespace WindowsStateTriggers
 		/// Gets or sets the value for regex evaluation.
 		/// </summary>
 		public string Value
-		{
-			get { return (string)GetValue(ValueProperty); }
-			set { SetValue(ValueProperty, value); }
-		}
+        {
+            get => (string)GetValue(ValueProperty);
+            set => SetValue(ValueProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="Value"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty ValueProperty =
+        /// <summary>
+        /// Identifies the <see cref="Value"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty ValueProperty =
 			DependencyProperty.Register(nameof(Value), typeof(string), typeof(RegexStateTrigger), 
 			new PropertyMetadata(null, OnValuePropertyChanged));
 
@@ -56,30 +56,30 @@ namespace WindowsStateTriggers
 		/// Gets or sets the regular expression.
 		/// </summary>
 		public string Expression
-		{
-			get { return (string)GetValue(ExpressionProperty); }
-			set { SetValue(ExpressionProperty, value); }
-		}
+        {
+            get => (string)GetValue(ExpressionProperty);
+            set => SetValue(ExpressionProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="Expression"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty ExpressionProperty =
+        /// <summary>
+        /// Identifies the <see cref="Expression"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty ExpressionProperty =
 					DependencyProperty.Register(nameof(Expression), typeof(string), typeof(RegexStateTrigger), new PropertyMetadata(null, OnValuePropertyChanged));
 		
 		/// <summary>
 		/// Gets or sets the regular expression options
 		/// </summary>
 		public RegexOptions Options
-		{
-			get { return (RegexOptions)GetValue(OptionsProperty); }
-			set { SetValue(OptionsProperty, value); }
-		}
+        {
+            get => (RegexOptions)GetValue(OptionsProperty);
+            set => SetValue(OptionsProperty, value);
+        }
 
-		/// <summary>
-		/// Identifies the <see cref="Options"/> DependencyProperty
-		/// </summary>
-		public static readonly DependencyProperty OptionsProperty =
+        /// <summary>
+        /// Identifies the <see cref="Options"/> DependencyProperty
+        /// </summary>
+        public static readonly DependencyProperty OptionsProperty =
 			DependencyProperty.Register(nameof(Options), typeof(RegexOptions), typeof(RegexStateTrigger), new PropertyMetadata(RegexOptions.None, OnValuePropertyChanged));
 		
 		#region ITriggerValue
@@ -91,24 +91,23 @@ namespace WindowsStateTriggers
 		/// </summary>
 		/// <value><c>true</c> if this trigger is active; otherwise, <c>false</c>.</value>
 		public bool IsActive
-		{
-			get { return m_IsActive; }
-			private set
-			{
-				if (m_IsActive != value)
-				{
-					m_IsActive = value;
-					base.SetActive(value);
-					if (IsActiveChanged != null)
-						IsActiveChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+        {
+            get => m_IsActive;
+            private set
+            {
+                if (m_IsActive != value)
+                {
+                    m_IsActive = value;
+                    base.SetActive(value);
+                    IsActiveChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Occurs when the <see cref="IsActive" /> property has changed.
-		/// </summary>
-		public event EventHandler IsActiveChanged;
+        /// <summary>
+        /// Occurs when the <see cref="IsActive" /> property has changed.
+        /// </summary>
+        public event EventHandler? IsActiveChanged;
 
 		#endregion ITriggerValue
 	}
