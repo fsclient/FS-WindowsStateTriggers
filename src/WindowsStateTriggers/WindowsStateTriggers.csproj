@@ -5,25 +5,10 @@
     <TargetPlatformVersion Condition="'$(TargetPlatformVersion)' == ''">10.0.19041.0</TargetPlatformVersion>
     <TargetPlatformMinVersion Condition="'$(TargetPlatformMinVersion)' == ''">10.0.10240.0</TargetPlatformMinVersion>
     <TargetPlatformMinVersion Condition="'$(TargetPlatformMinVersion)' == '' AND '$(TargetFramework)' == 'net5.0'">10.0.17134.0</TargetPlatformMinVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
     <RootNamespace>WindowsStateTriggers</RootNamespace>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
-    <Name>WindowsStateTriggers</Name>
-    <Title>WindowsStateTriggers</Title>
-    <Description>StateTriggers for use with the Windows 10 Visual State Manager.</Description>
-    <PackageTags>statetrigger adaptive uwp</PackageTags>
-    <Version>1.4.0</Version>
-    <Authors>Morten Nielsen</Authors>
-    <Copyright>© Morten Nielsen 2015-2020</Copyright>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageId>WindowsStateTriggersEx</PackageId>
-    <Product>WindowsStateTriggersEx</Product>
-    <AssemblyName>WindowsStateTriggersEx</AssemblyName>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid80' or '$(TargetFramework)' == 'xamarinios10' or '$(TargetFramework)' == 'netstandard2.0'">

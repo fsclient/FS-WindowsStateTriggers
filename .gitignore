@@ -187,3 +187,5 @@ UpgradeLog*.htm
 FakesAssemblies/
 project.lock.json
 src/.vs/
+/artifacts
+nuget.exe
