@@ -1,0 +1,34 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ publish ]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.100-preview.7.20366.6 
+    - name: Setup NuGet.exe for use with actions
+      uses: NuGet/setup-nuget@v1.0.2
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.0    
+    - name: MSBuild Restore
+      run: msbuild ./src/WindowsStateTriggers.sln /p:Configuration=Release /target:Restore
+    - name: MSBuild Build FSClient.UWP.Shared
+      run: msbuild ./src/WindowsStateTriggers.sln /p:Configuration=Release /target:Build
+    - name: Pack
+      run: nuget pack ./src/WindowsStateTriggers.nuspec -Properties Configuration=Release -Symbols -SymbolPackageFormat snupkg -OutputDirectory artifacts
+    - name: Add private GitHub registry to NuGet
+      run: nuget sources add -name "GPR" -Source https://nuget.pkg.github.com/fsclient/index.json -Username fsclient -Password ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish nupkg
+      run: dotnet nuget push ./artifacts/*.nupkg --source "GPR" -SkipDuplicate
+    - name: Publish snupkg
+      run: dotnet nuget push ./artifacts/*.snupkg --source "GPR" -SkipDuplicate
+      
