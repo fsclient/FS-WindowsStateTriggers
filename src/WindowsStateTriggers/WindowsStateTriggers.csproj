@@ -1,22 +1,25 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
   <PropertyGroup>
-    <TargetFrameworks>uap10.0.10240;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>uap10.0.10240;netstandard2.0;net5.0</TargetFrameworks>
+    <TargetFrameworkIdentifier Condition="'$(TargetFramework)' == 'net5.0'">.NETCoreApp</TargetFrameworkIdentifier>
+    <TargetPlatformVersion Condition="'$(TargetPlatformVersion)' == ''">10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion Condition="'$(TargetPlatformMinVersion)' == ''">10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformMinVersion Condition="'$(TargetPlatformMinVersion)' == '' AND '$(TargetFramework)' == 'net5.0'">10.0.17134.0</TargetPlatformMinVersion>
+    <RootNamespace>WindowsStateTriggers</RootNamespace>
     <LangVersion>8.0</LangVersion>
     <Nullable>enable</Nullable>
+    <Name>WindowsStateTriggers</Name>
     <Title>WindowsStateTriggers</Title>
     <Description>StateTriggers for use with the Windows 10 Visual State Manager.</Description>
     <PackageTags>statetrigger adaptive uwp</PackageTags>
-    <Version>1.3.0</Version>
-    <Authors>Max Katz</Authors>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/Tirraon/WindowsStateTriggers/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/Tirraon/WindowsStateTriggers</PackageProjectUrl>
-    <Copyright>© Max Katz 2019</Copyright>
-    <RepositoryUrl>https://github.com/Tirraon/WindowsStateTriggers</RepositoryUrl>
+    <Version>1.4.0</Version>
+    <Authors>Morten Nielsen</Authors>
+    <Copyright>© Morten Nielsen 2015-2020</Copyright>
     <NeutralLanguage>en-US</NeutralLanguage>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <PackageId>Tirraon.WindowsStateTriggers</PackageId>
-    <Product>Tirraon.WindowsStateTriggers</Product>
-    <AssemblyName>Tirraon.WindowsStateTriggers</AssemblyName>
+    <PackageId>WindowsStateTriggersEx</PackageId>
+    <Product>WindowsStateTriggersEx</Product>
+    <AssemblyName>WindowsStateTriggersEx</AssemblyName>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
@@ -24,21 +27,26 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'MonoAndroid80' or '$(TargetFramework)' == 'xamarinios10' or '$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Uno.UI" Version="2.0.512-dev.3325" />
+    <PackageReference Include="Uno.UI" Version="3.0.0-dev.899" />
   </ItemGroup>
-  
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+    <PackageReference Include="Microsoft.VCRTForwarders.140" Version="1.0.6" />
+    <PackageReference Include="Microsoft.WinUI" Version="3.0.0-preview2.200713.0" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.10240' ">
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.10" />
+  </ItemGroup>
+
   <PropertyGroup Condition="'$(TargetFramework)' == 'MonoAndroid80' or '$(TargetFramework)' == 'xamarinios10' or '$(TargetFramework)' == 'netstandard2.0'">
     <DefineConstants>$(DefineConstants);UNO</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
   </PropertyGroup>
-  
-  <ItemGroup Condition=" '$(TargetFramework)' == 'uap10.0.10240' ">
-    <PackageReference Include="System.Runtime.WindowsRuntime" Version="4.0.11" />
-  </ItemGroup>
-
-  <Import Project="$(MSBuildSDKExtrasTargets)" Condition="Exists('$(MSBuildSDKExtrasTargets)')" />
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net5.0' ">
+    <Platforms>AnyCPU;x86;x64</Platforms>
+    <RuntimeIdentifiers>win-x86;win-x64</RuntimeIdentifiers>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-19367-01" PrivateAssets="All" />

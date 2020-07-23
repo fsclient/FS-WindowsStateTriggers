@@ -1,6 +1,10 @@
 ﻿using System;
 using Windows.ApplicationModel.Core;
+#if NET5_0
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
+#endif
 
 namespace WindowsStateTriggers
 {

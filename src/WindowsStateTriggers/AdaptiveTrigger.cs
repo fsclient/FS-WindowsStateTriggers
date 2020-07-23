@@ -1,21 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
+#if NET5_0
+using Microsoft.UI.Xaml;
+using UXAdaptiveTrigger = Microsoft.UI.Xaml.AdaptiveTrigger;
+#else
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using UXAdaptiveTrigger = Windows.UI.Xaml.AdaptiveTrigger;
+#endif
 
 namespace WindowsStateTriggers
 {
     /// <summary>
-    /// Extends the <see cref="Windows.UI.Xaml.AdaptiveTrigger"/> functionality with 
+    /// Extends the <see cref="WUXAdaptiveTrigger"/> functionality with 
     /// <see cref="ITriggerValue"/> interface implementation 
     /// for <see cref="CompositeStateTrigger"/> usage
     /// </summary>
-    public class AdaptiveTrigger : Windows.UI.Xaml.AdaptiveTrigger, ITriggerValue
+    public class AdaptiveTrigger : UXAdaptiveTrigger, ITriggerValue
     {
         /// <summary>
 		/// Initializes a new instance of the <see cref="AdaptiveTrigger"/> class.
@@ -60,7 +60,7 @@ namespace WindowsStateTriggers
             }
         }
 
-        #region ITriggerValue
+#region ITriggerValue
 
         private bool _isActive;
 
@@ -86,6 +86,6 @@ namespace WindowsStateTriggers
         /// </summary>
         public event EventHandler? IsActiveChanged;
 
-        #endregion ITriggerValue
+#endregion ITriggerValue
     }
 }

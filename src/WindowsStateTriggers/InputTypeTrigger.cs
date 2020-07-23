@@ -3,8 +3,13 @@
 
 using System;
 using Windows.Devices.Input;
-using Windows.Foundation.Metadata;
+#if NET5_0
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Input;
+#else
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Input;
+#endif
 
 namespace WindowsStateTriggers
 {
@@ -60,7 +65,7 @@ namespace WindowsStateTriggers
 			}
 		}
 
-		private void TargetElement_PointerPressed(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+		private void TargetElement_PointerPressed(object sender, PointerRoutedEventArgs e)
 		{
 			IsActive = (e.Pointer.PointerDeviceType == PointerType);
 		}

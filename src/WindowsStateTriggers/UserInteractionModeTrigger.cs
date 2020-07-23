@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.UI.Core;
 using Windows.UI.ViewManagement;
+#if NET5_0
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
+using Windows.UI.Core;
+#endif
 
 namespace WindowsStateTriggers
 {

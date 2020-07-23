@@ -6,8 +6,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+#if NET5_0
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
-
+#endif
 namespace WindowsStateTriggers
 {
     public class EnumerableCountTrigger : StateTriggerBase, ITriggerValue

@@ -3,7 +3,11 @@
 
 using System;
 using Windows.Foundation.Metadata;
+#if NET5_0
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
+#endif
 
 namespace WindowsStateTriggers
 {

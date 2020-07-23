@@ -8,8 +8,13 @@ using System.Collections.Specialized;
 using System.Linq;
 using Windows.Devices.Input;
 using Windows.Foundation.Metadata;
+#if NET5_0
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Markup;
+#else
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Markup;
+#endif
 
 namespace WindowsStateTriggers
 {

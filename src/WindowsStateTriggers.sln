@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30310.162
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsStateTriggers", "WindowsStateTriggers\WindowsStateTriggers.csproj", "{52D52F3C-4F64-4957-9FE8-780B7D7F75C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WindowsStateTriggers", "WindowsStateTriggers\WindowsStateTriggers.csproj", "{52D52F3C-4F64-4957-9FE8-780B7D7F75C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{B4689B2B-C46B-40BF-A36B-D5D837352E8B}"
 EndProject
